@@ -83,7 +83,7 @@ def print_arguments(target_months, years = np.arange(1981,1983)):
 #                   ' leadtime_month = ' + str(leadtime_months))
 
 
-def _retrieve_single(variables, year, init_month, leadtimes, area, folder):
+def _retrieve_single(variables, year, init_month, leadtimes, area, folder, system=5):
     """Retrieve SEAS5 data from CDS.
         
         Parameters
@@ -108,7 +108,7 @@ def _retrieve_single(variables, year, init_month, leadtimes, area, folder):
         {
             'format': 'netcdf',
             'originating_centre': 'ecmwf',
-            'system': '5',
+            'system': system,
             'variable': variables,
             'product_type': ['monthly_mean'], #'monthly_maximum',, 'monthly_standard_deviation',],
             'year': str(year),  #data before 1993 is available.  
@@ -119,7 +119,7 @@ def _retrieve_single(variables, year, init_month, leadtimes, area, folder):
         folder + str(year) + "%.2i" % init_month + '.nc')
     
     
-def retrieve_SEAS5(variables, target_months, area, folder, years=np.arange(1981, 2017)): # operational SEAS5 until 2021 
+def retrieve_SEAS5(variables, target_months, area, folder, years=np.arange(1981, 2017), system = 5): # operational SEAS5 until 2021 
     """Retrieve SEAS5 data from CDS.
         
         Parameters
@@ -158,6 +158,7 @@ def retrieve_SEAS5(variables, target_months, area, folder, years=np.arange(1981,
                                      init_month=init_month,
                                      leadtimes=leadtime_months,
                                      area = area,
+                                     system=system,
                                      folder=folder)
     else:
         for j in range(len(years)): 
@@ -172,6 +173,7 @@ def retrieve_SEAS5(variables, target_months, area, folder, years=np.arange(1981,
                                     init_month=init_month,
                                     leadtimes=leadtime_months,
                                     area = area,
+                                    system=system,
                                     folder=folder)
 
 def retrieve_ERA5(variables,
@@ -192,7 +194,7 @@ def retrieve_ERA5(variables,
                       '12',
                   ],
                   area=[90, -180, -90, 180],
-                  years=np.arange(1979, 2021)):
+                  years=np.arange(1979, 2025)):
     """Retrieves the full ERA5 dataset from CDS (years 1979-2020).
         
         Parameters
