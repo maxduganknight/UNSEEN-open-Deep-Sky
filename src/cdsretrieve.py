@@ -194,7 +194,7 @@ def retrieve_ERA5(variables,
                       '12',
                   ],
                   area=[90, -180, -90, 180],
-                  years=np.arange(1979, 2025)):
+                  years=np.arange(1979, 2021)):
     """Retrieves the full ERA5 dataset from CDS (years 1979-2020).
         
         Parameters
